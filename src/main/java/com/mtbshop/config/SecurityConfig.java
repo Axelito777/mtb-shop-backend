@@ -30,16 +30,7 @@ public class SecurityConfig {
     
 @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-            .cors(cors -> cors.configurationSource(request -> {
-                var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-                corsConfig.setAllowedOrigins(java.util.List.of("http://localhost:5173", "http://localhost:3000"));
-                corsConfig.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                corsConfig.setAllowedHeaders(java.util.List.of("*"));
-                corsConfig.setAllowCredentials(true);
-                return corsConfig;
-            }))
-            .csrf(AbstractHttpConfigurer::disable)  // ← DESHABILITA CSRF COMPLETAMENTE
+    .cors(AbstractHttpConfigurer::disable)
             .headers(headers -> headers
                     .frameOptions(frame -> frame.sameOrigin())
             )
